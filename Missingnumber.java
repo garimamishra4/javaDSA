@@ -1,3 +1,5 @@
+q- You are given an array of distinct integers from 0 to n, where one number is missing. Your task is to find the missing number.
+ sol-
 import java.util.*;
 
  public class Missingnumber
