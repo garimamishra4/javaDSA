@@ -1,3 +1,7 @@
+ques - Finding the minimum and maximum element in an array or list? This is a fundamental task.
+
+    sol -
+
 import java.util.*;
 
 public class Minmax
