@@ -1,0 +1,28 @@
+class Solution {
+    public String intToRoman(int num) {
+
+        /*
+        1.create value symbol mapping
+        2.create a new stringbuilder to append strings to it
+        3.while number> some number from the symbol array
+            subtract the number in array from given number
+            and add the value obtained in the new string from string symbols    
+            corresponding to it. 
+         */
+
+        int[] values  =  {1000, 900, 500, 400, 100, 90,  50, 40,  10, 9,   5, 4, 1};
+        String[] symbols ={"M",  "CM","D", "CD","C","XC","L","XL","X","IX","V","IV","I"};
+        StringBuilder roman =  new StringBuilder();
+        for(int i=0; i<values.length ; i++)
+        {
+            while(num>=values[i])
+            {
+                num -= values[i];
+                roman.append(symbols[i]);
+            }
+        }
+        return roman.toString();
+
+
+    }
+}
