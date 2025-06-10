@@ -1,0 +1,28 @@
+class Solution {
+    public int romanToInt(String s) {
+        /*
+        1.create a map for roman character with their integer value.
+        2.iterrate through every character of string from left to right.
+        3.if leftchar<rightchar add in sum , else subtract 
+        4. return sum.
+         */
+
+         Map<Character,Integer> roman = Map.of('I',1,'V',5, 'X', 10,
+            'L', 50, 'C', 100, 'D', 500, 'M', 1000) ;
+            int sum = 0;
+            int n = s.length();
+            for(int i = 0; i<n; i++)
+            {
+                int leftchar = roman.get(s.charAt(i));
+                int rightchar = (i+1<n) ? roman.get(s.charAt(i+1)) : 0 ;
+                if(leftchar<rightchar){
+                    sum -= leftchar;
+                }  
+                else{
+                    sum+=leftchar;
+                }
+            }
+            return sum;
+
+    }
+}
