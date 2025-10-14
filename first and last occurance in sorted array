@@ -1,0 +1,41 @@
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int n = nums.length;
+        int first = firstOccurrence(nums, n, target);
+        int last  = lastOccurrence(nums, n, target);
+
+        return new int[]{first, last};
+    }
+
+    public static int firstOccurrence(int[] arr, int n, int k) {
+        int start = 0, end = n - 1, res = -1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (arr[mid] == k) {
+                res = mid;
+                end = mid - 1; // move left to find first occurrence
+            } 
+            else if (k > arr[mid]) start = mid + 1;
+            else end = mid - 1;
+        }
+        return res;
+    }
+
+    public static int lastOccurrence(int[] arr, int n, int k) {
+        int start = 0, end = n - 1, res = -1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (arr[mid] == k) {
+                res = mid;
+                start = mid + 1; // move right to find last occurrence
+            } 
+            else if (k < arr[mid]) end = mid - 1;
+            else start = mid + 1;
+        }
+        return res;
+    }
+}
