@@ -1,0 +1,28 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> l = new ArrayList<>();
+
+            for(int i=0;i<numRows;i++){
+                List<Integer> r = new ArrayList<>();
+                long val = 1;
+                for(int j=0;j<=i;j++){
+                    r.add((int) val);
+                    val = val * (i-j)/(j+1);
+
+                   /* if(j==0||j==i){
+                        r.add(1);
+                    }
+                    else{
+                        List<Integer> p = l.get(i-1);
+                        r.add(p.get(j-1)+p.get(j));
+                    }*/
+                } 
+                l.add(r);
+
+            }
+        
+        return l;
+
+        
+    }
+}
