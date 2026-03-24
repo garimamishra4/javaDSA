@@ -1,0 +1,62 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+ import java.util.*;
+class Solution {
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+      /*  Map<Integer,List<Integer>> m = new TreeMap<>();
+        Queue<Object[]> q = new LinkedList<>();
+        q.offer(new Object[] {root,0});
+        while(!q.isEmpty()){
+            Object[] arr = q.poll();
+            TreeNode node = (TreeNode) arr[0];
+            int col = (int) arr[1];
+            m.putIfAbsent(col,new ArrayList<>());
+            m.get(col).add(node.val);
+            if(node.left != null) q.offer(new Object[]{node.left,col-1});
+            if(node.right!=null) q.offer(new Object[]{node.right,col+1});
+        }
+        return new ArrayList<>(m.values()); had one minor issue */
+        Map<Integer,TreeMap<Integer,PriorityQueue<Integer>>> m = new TreeMap<>();
+        Queue<Map.Entry<TreeNode,Map.Entry<Integer,Integer>>> q = new LinkedList<>();
+        q.offer(new AbstractMap.SimpleEntry<>(root, new AbstractMap.SimpleEntry<>(0,0)));
+        while(!q.isEmpty()){
+            Map.Entry<TreeNode,Map.Entry<Integer,Integer>> e = q.poll();
+            TreeNode n = e.getKey();
+            int r = e.getValue().getKey();
+            int c= e.getValue().getValue();
+            m.putIfAbsent(c,new TreeMap<>());
+            m.get(c).putIfAbsent(r,new PriorityQueue<>());
+            m.get(c).get(r).offer(n.val);
+            if(n.left!=null)
+            q.offer(new AbstractMap.SimpleEntry<>(n.left,
+            new AbstractMap.SimpleEntry<>(r+1,c-1)));
+            if(n.right!=null) q.offer(new AbstractMap.SimpleEntry<>(n.right,
+            new AbstractMap.SimpleEntry<>(r+1,c+1)));
+        }
+        List<List<Integer>> res = new ArrayList<>();
+        for(TreeMap<Integer,PriorityQueue<Integer>> r: m.values()){
+            List<Integer> cl = new ArrayList<>();
+            for(PriorityQueue<Integer> pq: r.values()){
+                while(!pq.isEmpty()){ 
+                    cl.add(pq.poll());}
+                    
+            }
+            res.add(cl);
+        }
+        return res;
+        
+    }
+}
