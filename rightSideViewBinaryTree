@@ -1,0 +1,14 @@
+class Solution {
+    public void rdfs(TreeNode node, int p, List<Integer> l){
+        if(node==null) return;
+        if(p==l.size()) l.add(node.val);
+        rdfs(node.right,p+1,l);
+        rdfs(node.left,p+1,l);
+
+    }
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> l = new ArrayList<>();     
+        rdfs(root,0,l);
+        return l;   
+    }
+}
