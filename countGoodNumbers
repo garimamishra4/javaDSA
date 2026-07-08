@@ -1,0 +1,27 @@
+class Solution {
+    static final long m = 1000000007;
+    /*public long count(long n , int i){
+        if(i==n) return 1;
+        long a = count(n,i+1);
+        if(i%2==0) return (5*a) % m ;
+        else return (4 * a) % m;
+
+    }*/
+    public long power(long b , long e){
+        if(e==0) return 1;
+        long half = power(b,e/2);
+        long a = (half * half) % m;
+        if(e%2==1) a = (a * b) % m;
+        return a;
+
+    }
+
+    public int countGoodNumbers(long n) {
+        long e = (n+1) / 2;
+        long o = n / 2;
+        long ev = power(5,e);
+        long ov = power(4,o);
+        return (int) ((ev * ov) % m) ;
+        
+    }
+}
