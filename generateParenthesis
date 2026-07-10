@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isvalid(String s){
+        int b = 0;
+        for(char c : s.toCharArray()){
+            if(c == '(') b++;
+            else b--;
+            if(b<0) return false;
+        }
+        return b==0;
+
+    }
+
+    public void generateall(String s , int n , List<String>res){
+        if(s.length() == 2*n){
+            if(isvalid(s)) res.add(s);
+            return;
+        }
+        generateall(s + "(" , n , res);
+        generateall(s + ")" , n , res);
+    }
+
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        generateall("",n,res);
+        return res;
+    }
+}
