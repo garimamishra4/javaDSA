@@ -1,0 +1,32 @@
+class Solution {
+    public String longestPalindrome(String s) {
+       // s or end initialize krenge 
+       // loop mein even or odd palindrome length find krenge
+       //max nikalenge 
+       // max nikalke s or e update krenge , s se e tk ki string humari longest palindromic substring hogi . 
+
+       if(s.length() <=1) return s ;
+       int e = 0 , st =0;
+       for(int i =0; i<s.length() ; i++){
+        int len1 = fxn(s,i,i);
+        int len2 = fxn(s,i,i+1);
+        int len = Math.max(len1 , len2);
+        if(len > e-st +1){
+            st = i - (len -1)/2 ;
+            e = i + len/2;
+        } 
+       }
+       return s.substring(st,e+1); }
+
+       public int fxn(String s , int l , int r){
+        while(l>=0 && r< s.length() && s.charAt(l)== s.charAt(r)){
+            l--;
+            r++;
+        }
+        return r - l - 1;
+
+       }
+
+
+    }
+  
