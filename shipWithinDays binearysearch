@@ -1,0 +1,29 @@
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int m =0; 
+        int s = 0;
+        for(int i =0; i<weights.length ; i++){ 
+            m = Math.max(m,weights[i]);
+            s+=weights[i];
+         }
+        
+        while(m<=s){
+            int mid = m + (s-m)/2;
+            if(fxn(mid,weights)<=days) s = mid -1;
+            else m = mid +1;
+        }
+        return m;
+    }
+    public int fxn(int w , int[] weights){
+        int l = 0;
+        int d =1;
+        for(int wt : weights){
+            if(l+wt <= w) l+=wt;
+            else{
+                d++;
+                l = wt;
+            }
+        }
+        return d;
+    }
+}
